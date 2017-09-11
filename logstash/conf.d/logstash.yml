@@ -1,0 +1,5 @@
+#log.level: debug
+#xpack.monitoring.elasticsearch.password: changeme
+#xpack.monitoring.elasticsearch.username: logstash_system
+#xpack.monitoring.elasticsearch.url: http://elasticsearch:9200
+#xpack.monitoring.enabled: false
