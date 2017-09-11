@@ -1,0 +1,56 @@
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      xpack.security.enabled: "false"
+      xpack.monitoring.enabled: "false"
+      xpack.graph.enabled: "false"
+      xpack.watcher.enabled: "false"
+    volumes:
+      - /Development/esdata/elasticsearch/data:/usr/share/elasticsearch/data
+    networks:
+      - elk
+    restart: unless-stopped
+  logstash:
+    image: logstash:latest
+    links:
+      - elasticsearch
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
+      LS_HEAP_SIZE: 500m
+    command:
+      logstash -f /etc/logstash/conf.d/logstash.conf
+    ports:
+      - "5000:5000"
+      - "9600:9600" 
+    volumes:
+      - /Development/esdata/logstash/conf.d:/etc/logstash/conf.d:ro
+      - /Development/esdata/sourcelogs:/host/var/log
+    networks:
+      - elk
+    restart: unless-stopped
+  kibana:
+    image: kibana:latest
+    links:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200 
+    volumes:
+      - /Development/esdata/kibana:/etc/kibana
+    networks:
+      - elk
+    restart: unless-stopped
+networks:
+  elk:
+    driver: bridge    
