@@ -51,5 +51,6 @@ curl -s -XPOST http://localhost:9200/geo/place/_search --data-binary @query_dist
 curl -s -XPOST http://localhost:9200/geo/place/_search --data-binary @query_distance_from_hobart_filter_1500km.json
 ```
 
-### Reference: https://github.com/rudijs/elasticsearch-geolocation-demo
-
+### Reference:
+#### https://github.com/rudijs/elasticsearch-geolocation-demo
+#### http://www.sanjeevnandam.com/blog/logstash-convert-zipcodepostal-code-to-geo_point-latitudelongitude
