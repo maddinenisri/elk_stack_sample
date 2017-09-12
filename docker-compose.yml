@@ -17,7 +17,7 @@ services:
       - elk
     restart: unless-stopped
   logstash:
-    image: logstash:latest
+    build: logstash
     links:
       - elasticsearch
     environment:
