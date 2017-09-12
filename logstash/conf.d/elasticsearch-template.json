@@ -13,15 +13,14 @@
            "type" : "geo_point",
            "doc_values" : true
          },
-          "geoip"  : {
-          "type" : "object",
-          "dynamic": true,
-          "properties" : {
-            "ip": { "type": "ip", "doc_values" : true },
-            "latitude" : { "type" : "float", "doc_values" : true },
-            "longitude" : { "type" : "float", "doc_values" : true }
+         "geoip":{
+       "dynamic":true,
+       "properties":{
+          "location":{
+             "type":"geo_point"
           }
-        }
+       }
+    }
       }
     }
   }
