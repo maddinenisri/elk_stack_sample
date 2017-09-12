@@ -1,0 +1,14 @@
+{
+  "place": {
+    "properties": {
+      "place": {
+        "type": "text",
+        "store": true,
+        "index": true
+      },
+      "location": {
+        "type": "geo_point"
+      }
+    }
+  }
+}
